@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -30,14 +33,14 @@ public class Ejercicio2 extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cmdCalcular = new javax.swing.JButton();
+        cmdBorrar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtSueldoBase = new javax.swing.JTextField();
+        txtNumeroHijos = new javax.swing.JTextField();
+        txtTotalBonificacion = new javax.swing.JTextField();
+        txtTotalPagar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,15 +61,25 @@ public class Ejercicio2 extends javax.swing.JFrame {
         jLabel3.setText("Numero De Hijos");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 204, 51));
-        jButton1.setText("CALCULAR");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, -1, -1));
+        cmdCalcular.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cmdCalcular.setForeground(new java.awt.Color(0, 204, 51));
+        cmdCalcular.setText("CALCULAR");
+        cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCalcularActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 204, 0));
-        jButton2.setText("BORRAR");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
+        cmdBorrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cmdBorrar.setForeground(new java.awt.Color(0, 204, 0));
+        cmdBorrar.setText("BORRAR");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 255));
@@ -77,16 +90,28 @@ public class Ejercicio2 extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 255));
         jLabel5.setText("Monto Total A Pagar");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, -1, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 140, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 90, -1));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+        txtSueldoBase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSueldoBaseKeyTyped(evt);
             }
         });
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 180, -1));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 150, -1));
+        jPanel1.add(txtSueldoBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 140, -1));
+
+        txtNumeroHijos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroHijosKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtNumeroHijos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 90, -1));
+
+        txtTotalBonificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalBonificacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtTotalBonificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 180, -1));
+        jPanel1.add(txtTotalPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,9 +127,63 @@ public class Ejercicio2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtTotalBonificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalBonificacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtTotalBonificacionActionPerformed
+
+    private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
+    String MontoBonificacion, MontoTotal;
+    int Nhijos, ope1=0;
+    double SueldoBase, ope2=0;
+    
+    if(txtNumeroHijos.getText().trim().isEmpty()){
+    JOptionPane.showMessageDialog(this, "Digite el numero de hijos", "Error", JOptionPane.ERROR_MESSAGE);
+    txtNumeroHijos.requestFocusInWindow();
+    }
+    else if(txtSueldoBase.getText().trim().isEmpty()){
+    JOptionPane.showInternalMessageDialog(this, "Digite el sueldo base", "Error", JOptionPane.ERROR_MESSAGE);
+    txtSueldoBase.requestFocusInWindow();
+    }
+    else {
+    Nhijos= Integer.parseInt(txtNumeroHijos.getText());
+    SueldoBase= Double.parseDouble(txtSueldoBase.getText());
+    
+    ope1= Nhijos*80000;
+    ope2= ope1+SueldoBase;
+    }
+    MontoBonificacion= String.valueOf(ope1);
+    txtTotalBonificacion.setText(MontoBonificacion);
+    MontoTotal= String.valueOf(ope2);
+    txtTotalPagar.setText(MontoTotal);
+    
+    }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void txtNumeroHijosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroHijosKeyTyped
+    char c=evt.getKeyChar();
+    
+    if(!Character.isDigit(c)){
+    getToolkit().beep();
+    evt.consume();
+    }
+    }//GEN-LAST:event_txtNumeroHijosKeyTyped
+
+    private void txtSueldoBaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSueldoBaseKeyTyped
+    char c=evt.getKeyChar();
+    
+    if(!Character.isDigit(c)){
+    getToolkit().beep();
+    evt.consume();
+    }
+    }//GEN-LAST:event_txtSueldoBaseKeyTyped
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+    txtNumeroHijos.setText("");
+    txtSueldoBase.setText("");
+    txtTotalBonificacion.setText("");
+    txtTotalPagar.setText("");
+    
+    txtSueldoBase.requestFocusInWindow();
+    }//GEN-LAST:event_cmdBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,17 +221,17 @@ public class Ejercicio2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cmdBorrar;
+    private javax.swing.JButton cmdCalcular;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txtNumeroHijos;
+    private javax.swing.JTextField txtSueldoBase;
+    private javax.swing.JTextField txtTotalBonificacion;
+    private javax.swing.JTextField txtTotalPagar;
     // End of variables declaration//GEN-END:variables
 }
