@@ -105,12 +105,15 @@ public class Ejercicio2 extends javax.swing.JFrame {
         });
         jPanel1.add(txtNumeroHijos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 90, -1));
 
+        txtTotalBonificacion.setEditable(false);
         txtTotalBonificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTotalBonificacionActionPerformed(evt);
             }
         });
         jPanel1.add(txtTotalBonificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 180, -1));
+
+        txtTotalPagar.setEditable(false);
         jPanel1.add(txtTotalPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
